@@ -1,7 +1,7 @@
 /* Edit section labels in index.html; tune the choreography here. No dependencies. */
 (() => {
   'use strict';
-  const motion = { flipDistance: 250, detachDistance: 260, stagger: .12, arc: 28, hoverDelay: 140, zoomDamping: 10, jumpDuration: 1050 };
+  const motion = { flipDistance: 250, detachDistance: 260, sectionRest: 96, stagger: .12, arc: 28, hoverDelay: 140, zoomDamping: 10, jumpDuration: 1050 };
   const clamp = (v, lo = 0, hi = 1) => Math.max(lo, Math.min(hi, v));
   const mix = (a, b, t) => a + (b - a) * t;
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -37,6 +37,17 @@
       let total = 0;
       s.chars.forEach((el, i) => { el.style.transform = 'none'; const width = el.getBoundingClientRect().width; s.widths[i] = width; s.centers[i] = total + width / 2; total += width; }); s.width = total;
     }
+    // Short sections still get a settled navigation stop before the next word departs.
+    // Remap the whole letter journey, preserving its shape and reverse-scroll behavior.
+    const rate = 1 + (geom.nav + 26) / geom.max;
+    for (const s of sections.slice(1)) {
+      const rideLength = s.width * (geom.mobile ? 13 : 20) / 32;
+      const naturalStart = (geom.top + s.anchor - (geom.h - 36 + motion.detachDistance - rideLength)) / rate;
+      const previousStop = targetFor(sections[s.index - 1]), stop = targetFor(s);
+      const rest = Math.min(motion.sectionRest, Math.max(0, stop - previousStop) * .16);
+      const start = Math.min(stop - 1, Math.max(naturalStart, previousStop + rest));
+      s.journey = { naturalStart, start, stop };
+    }
     heroChars.forEach(el => el.style.transform = 'none');
     heroBase = heroChars.map(el => { const r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + y + r.height / 2 }; });
     geom.heroFont = parseFloat(getComputedStyle(wordmark).fontSize);
@@ -50,6 +61,13 @@
     requestFrame();
   }
   function targetFor(s) { return s.index === 0 ? 0 : clamp(s.anchor - geom.nav - 16, 0, geom.max); }
+  function journeyScroll(s, scroll, inverse = false) {
+    const j = s.journey;
+    if (!j || j.start <= j.naturalStart || scroll >= j.stop) return scroll;
+    const from = inverse ? j.naturalStart : j.start;
+    const to = inverse ? j.start : j.naturalStart;
+    return mix(to, j.stop, clamp((scroll - from) / (j.stop - from)));
+  }
   document.addEventListener('click', event => {
     const link = event.target.closest('a[href^="#"]'); if (!link) return;
     const s = sections.find(s => '#' + s.el.id === link.getAttribute('href')); if (!s) return;
@@ -105,7 +123,7 @@
     const titleSize = geom.mobile ? 22 : 32, smallSize = geom.mobile ? 11 : 16, rideSize = geom.mobile ? 13 : 20, slot = geom.mobile ? 18 : 21;
     const topThreshold = geom.nav + 80;
     const state = sections.map((s, i) => {
-      const y = normalTick(s.anchor / geom.doc, scroll);
+      const y = normalTick(s.anchor / geom.doc, journeyScroll(s, scroll));
       const flip = i === 0 ? clamp((scroll - geom.heroStart) / 310) : clamp((topThreshold + motion.flipDistance - y) / motion.flipDistance);
       return { y, flip, detach: i === 0 ? 1 : 0, queuedY: bottom, rideLength: s.width * rideSize / 32 };
     });
@@ -156,7 +174,7 @@
     if (!snapDone && !jump && !dragging && zoom < .01 && !reduced.matches && now-lastInteraction > 500 && Math.abs(velocity)<25) {
       snapDone = true;
       const i = state.findIndex(s => s.flip>.05 && s.flip<.95);
-      if (i >= 0) { const st = state[i]; let target; if (i === 0) target = geom.heroStart + (st.flip >= .5 ? 312 : -2); else { const yTarget = topThreshold + (st.flip >= .5 ? -2 : motion.flipDistance + 2); target = (geom.top + sections[i].anchor - yTarget) / (1 + (geom.nav + 26) / geom.max); } scrollToY(target, 600); }
+      if (i >= 0) { const st = state[i]; let target; if (i === 0) target = geom.heroStart + (st.flip >= .5 ? 312 : -2); else { const yTarget = topThreshold + (st.flip >= .5 ? -2 : motion.flipDistance + 2); target = journeyScroll(sections[i], (geom.top + sections[i].anchor - yTarget) / (1 + (geom.nav + 26) / geom.max), true); } scrollToY(target, 600); }
     }
     if (jump || zoom !== zoomTarget || Math.abs(velocity) > .5 || !snapDone) requestFrame();
   }
