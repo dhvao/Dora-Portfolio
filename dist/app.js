@@ -52,6 +52,11 @@
     heroBase = heroChars.map(el => { const r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + y + r.height / 2 }; });
     geom.heroFont = parseFloat(getComputedStyle(wordmark).fontSize);
     geom.heroStart = Math.max(0, heroBase[0].y - nav - 110);
+    // Artwork pages have shorter headers than collection pages. Finish the hero
+    // flight before their first navigation stop, using the same letter paths.
+    const heroEnd = sections[1] ? Math.max(1, targetFor(sections[1]) - 24) : geom.heroStart + 310;
+    geom.heroStart = Math.min(geom.heroStart, Math.max(0, heroEnd - 40));
+    geom.heroZone = Math.max(1, Math.min(310, heroEnd - geom.heroStart));
     measurePending = false;
   }
   function scrollToY(y, duration = motion.jumpDuration) {
@@ -124,7 +129,7 @@
     const topThreshold = geom.nav + 80;
     const state = sections.map((s, i) => {
       const y = normalTick(s.anchor / geom.doc, journeyScroll(s, scroll));
-      const flip = i === 0 ? clamp((scroll - geom.heroStart) / 310) : clamp((topThreshold + motion.flipDistance - y) / motion.flipDistance);
+      const flip = i === 0 ? clamp((scroll - geom.heroStart) / geom.heroZone) : clamp((topThreshold + motion.flipDistance - y) / motion.flipDistance);
       return { y, flip, detach: i === 0 ? 1 : 0, queuedY: bottom, rideLength: s.width * rideSize / 32 };
     });
     let queue = 0;
@@ -174,7 +179,7 @@
     if (!snapDone && !jump && !dragging && zoom < .01 && !reduced.matches && now-lastInteraction > 500 && Math.abs(velocity)<25) {
       snapDone = true;
       const i = state.findIndex(s => s.flip>.05 && s.flip<.95);
-      if (i >= 0) { const st = state[i]; let target; if (i === 0) target = geom.heroStart + (st.flip >= .5 ? 312 : -2); else { const yTarget = topThreshold + (st.flip >= .5 ? -2 : motion.flipDistance + 2); target = journeyScroll(sections[i], (geom.top + sections[i].anchor - yTarget) / (1 + (geom.nav + 26) / geom.max), true); } scrollToY(target, 600); }
+      if (i >= 0) { const st = state[i]; let target; if (i === 0) target = geom.heroStart + (st.flip >= .5 ? geom.heroZone + 2 : -2); else { const yTarget = topThreshold + (st.flip >= .5 ? -2 : motion.flipDistance + 2); target = journeyScroll(sections[i], (geom.top + sections[i].anchor - yTarget) / (1 + (geom.nav + 26) / geom.max), true); } scrollToY(target, 600); }
     }
     if (jump || zoom !== zoomTarget || Math.abs(velocity) > .5 || !snapDone) requestFrame();
   }

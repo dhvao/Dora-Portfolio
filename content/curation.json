@@ -1,0 +1,32 @@
+{
+  "artist": "Dora Kuzmić",
+  "titlePolicy": "Titles are descriptive catalog labels, not confirmed artist titles. Medium, date, dimensions, biography and availability remain unconfirmed unless explicit in source folders.",
+  "collections": [
+    {"id":"digital","title":"Digital works","rail":"DIGITAL","number":"01","cover":34,"accent":"#e7ecdf","description":"Expressive figures, observed streets and layered lines. Four series drawn in Procreate.","series":["colour-and-body","street-notes","graphic-stories","animal-lines"]},
+    {"id":"red","title":"Studies in red","rail":"RED","number":"02","cover":12,"accent":"#f1e1dc","description":"A red line moves through rooms, rooftops and city streets. Two connected groups of drawings.","series":["red-city","rooms-and-windows"]},
+    {"id":"studio","title":"From the studio","rail":"STUDIO","number":"03","cover":28,"accent":"#e3e7e1","description":"Painted architecture and studies of the human figure. Collected works from the studio.","series":["city-and-structure","figure-studies"]}
+  ],
+  "series": [
+    {"id":"colour-and-body","title":"Colour & body","rail":"FIGURES","collection":"digital","cover":34,"description":"Green figures, loose gestures and fields of colour. A series exploring pose, proportion and the space around the body.","works":[34,32,35,36,41,38,39,42,43,44,45,46,48,52,53,54,55,56,64,65,33]},
+    {"id":"street-notes","title":"Street notes","rail":"STREETS","collection":"digital","cover":76,"description":"Stairways, courtyards and ordinary corners, observed in dark lines with occasional flashes of red.","works":[76,63,67,68,69,75,77]},
+    {"id":"graphic-stories","title":"Graphic stories","rail":"STORIES","collection":"digital","cover":70,"description":"Figures overlap, gestures repeat, and red becomes a rhythm. Small scenes with a graphic sensibility.","works":[70,71,73,74,62,72,78]},
+    {"id":"animal-lines","title":"Animal lines","rail":"ANIMALS","collection":"digital","cover":59,"description":"Five animal studies built from overlapping red and black lines.","works":[59,57,58,60,61]},
+    {"id":"red-city","title":"The red city","rail":"CITY","collection":"red","cover":12,"description":"Facades, rooftops, crossings and windows. Red drawing meets blocks of colour and repeated architectural forms.","works":[12,10,11,8,23,9,14,15,16,17,18,13]},
+    {"id":"rooms-and-windows","title":"Rooms & windows","rail":"ROOMS","collection":"red","cover":7,"description":"A quieter group of interior fragments: a cat, an open window and figures at the edge of a room.","works":[7,22,6,5,4]},
+    {"id":"city-and-structure","title":"City & structure","rail":"STRUCTURE","collection":"studio","cover":28,"description":"Bridges, stations and buildings hold their own presence. Painted spaces and figures meet within layered architectural compositions.","works":[28,26,27,30,31,29,20,21]},
+    {"id":"figure-studies","title":"Figure studies","rail":"STUDIES","collection":"studio","cover":19,"description":"Portraits, seated poses and anatomical studies, moving between close observation and expressive marks.","works":[19,1,2,24,25,3]}
+  ],
+  "variants": {"41":[37],"42":[40],"46":[47],"63":[66]},
+  "references": [49,50,51],
+  "descriptions": {
+    "1":"Seated figure with green drapery", "2":"Seated life study on warm paper", "3":"Figure fragment with red and grey planes",
+    "4":"Cat in red line", "5":"Window above a magenta field", "6":"Figure beside an outlined window", "7":"Figure at the edge of a room",
+    "8":"Rooftops above an orange band", "9":"City fragments in red", "10":"Street corner with overhead wires", "11":"Facades beneath a red crossing line",
+    "12":"Cyclist on a city street", "13":"Red buildings above a blue field", "14":"Layered apartment blocks", "15":"A cluster of red facades", "16":"Tall building and reflected forms", "17":"City between red stripes", "18":"Black and white facades on red",
+    "19":"Portrait in warm tones", "20":"Figure within a green city grid", "21":"Figure within an orange city grid", "22":"Potted plants at an open window", "23":"Panorama of red rooftops", "24":"Torso with red contour lines", "25":"Figures and hanging hands",
+    "26":"Industrial passage in green", "27":"Concrete building and elevated walkway", "28":"Red bridge and passing figures", "29":"Figures waiting at a station", "30":"White building on a dark ground", "31":"Tall building with red windows",
+    "32":"Standing figure against coral and violet", "33":"Reclining figure with graphic lettering", "34":"Standing figure against pink and orange", "35":"Seated figure against orange lettering", "36":"Standing figure with pale patterned lines", "37":"Seated figure and enlarged hand — alternate export", "38":"Reclining figure with raised hand", "39":"Leaning figure in teal and ochre", "40":"Seated figure with sunglasses — alternate export", "41":"Seated figure and enlarged hand", "42":"Seated figure with sunglasses", "43":"Crouching figure in red", "44":"Standing figure in patterned trousers", "45":"Cross-legged figure in yellow and violet", "46":"Reclining figure behind a raised hand", "47":"Reclining figure behind a raised hand — alternate export", "48":"Seated figure in a patterned chair",
+    "49":"White architectural steps against a blue sky", "50":"Yellow modernist pavilion — saved reference", "51":"Orange architectural illustration — saved reference",
+    "52":"Curled figure in blue", "53":"Seated figure in a striped swimsuit", "54":"Seated figure with striped socks", "55":"Figure holding a bent leg", "56":"Reclining figure on violet", "57":"Overlapping dog studies", "58":"Long-eared animal in red and black", "59":"Pointed-ear dog in red and black", "60":"Dog portrait with red contours", "61":"Open jaws in layered lines", "62":"Figure stretching overhead", "63":"Stairway beside a bare tree", "64":"Reclining figure on violet and turquoise", "65":"Seated figure against a green field", "66":"Stairway beside a bare tree — alternate export", "67":"Steps through a planted courtyard", "68":"A passage between buildings", "69":"Figure in a tiled interior", "70":"Portrait and overlapping figures in red", "71":"Seated figure beside a red pattern", "72":"Overlapping suspended figures", "73":"Repeated reclining figures in blue and red", "74":"Raised hands on a red ground", "75":"Red street corner and kiosk", "76":"Courtyard with a red stairway", "77":"Figure and dog by a red crossing", "78":"Two figures beneath an orange sky"
+  }
+}
