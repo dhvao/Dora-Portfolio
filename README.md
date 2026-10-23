@@ -1,4 +1,4 @@
-﻿# Website — artwork portfolio
+# Website — artwork portfolio
 
 This Desktop `website` folder is the working project. The earlier copy at `C:/Users/TomaKuzmic/work/scroll-template` is historical and is not synchronized with this folder.
 
@@ -88,7 +88,7 @@ Image IDs are stable and correspond to source inventory entries. A series lists 
 
 The current generator and checker assert the 78-image/71-work inventory and use some fixed count labels. If new images are added, update those assertions and count labels, the inventory, curation, and this README together. New originals should be assigned new IDs rather than renumbering existing work URLs. Removing or renaming series also requires explicitly reviewing old generated pages so stale routes are not left behind; the builder does not delete directories automatically.
 
-The homepage is a small selection with links into each collection. Each series has its own gallery; each work has a full-image page, an accessible enlarged-image dialog, and previous/next work links. Alternate exports appear below the main image. The full archive filters by collection and searches descriptive captions and series names.
+The homepage is a small selection with links into each collection. At the user's request, it has no numbered "Selected" badge or tiny total-count line beneath the hero. Each series has its own gallery; each work has a full-image page, an accessible enlarged-image dialog, and previous/next work links. Alternate exports appear below the main image. The full archive filters by collection and searches descriptive captions and series names.
 
 Images retain their complete frame and original proportions. No generative edits, cropping, or recolouring were applied. Original photographs can include paper edges; reference screenshots retain their original interface elements. Transparent pixels in web copies are flattened onto white, and EXIF orientation is normalized.
 
