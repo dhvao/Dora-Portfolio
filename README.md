@@ -29,7 +29,7 @@ See `content/GROUPING.md` for the review, every series membership, alternate pai
 From this folder:
 
 ```powershell
-python -m http.server 4173 --bind 127.0.0.1 --directory dist
+python -m http.server 4173 --bind 127.0.0.1 --directory docs
 ```
 
 Open http://127.0.0.1:4173. Stop with Ctrl+C. Use a server when working with the nested pages.
@@ -52,7 +52,7 @@ website/
     build_gallery.py              Generate all page HTML from the catalog
     check_site.py                 Validate coverage, links, fragments, and assets
   source-media/                   Full original files, excluded from Git and deployment
-  dist/
+  docs/
     index.html                    Generated homepage
     collections/                  Generated collection and nested series pages
     works/                        Generated individual artwork pages
@@ -64,11 +64,11 @@ website/
     app.js                        Preserved ruler animation, with short-header adaptation
     gallery.js                    Menus, enlarged image dialog, archive filters, background hook
     site-config.js                Disabled future Procreate background configuration
-  docs/                           Historical template documentation
+  docs/template-handoff-2026-10-15.md  Historical template documentation
   artifacts/                      Ignored local QA scripts and screenshots
 ```
 
-**Edit `content/curation.json` and `scripts/build_gallery.py` for page content and markup.** Do not hand-edit generated HTML; regeneration overwrites it. CSS and JavaScript under `dist/` are maintained directly. Do not delete `dist/` wholesale as generated output: it also contains those source files and the optimized assets.
+**Edit `content/curation.json` and `scripts/build_gallery.py` for page content and markup.** Do not hand-edit generated HTML; regeneration overwrites it. CSS and JavaScript under `docs/` are maintained directly. Do not delete `docs/` wholesale as generated output: it also contains those source files and the optimized assets.
 
 There are currently **85 pages**: 1 home, 3 collection entrances, 8 series galleries, 71 artwork pages, 1 archive, and 1 reference shelf.
 
@@ -107,7 +107,7 @@ The first command skips existing derivatives. `--force` regenerates them from pr
 
 ## Preserved scroll ruler
 
-`dist/app.js` retains the original scroll-driven letter choreography:
+`docs/app.js` retains the original scroll-driven letter choreography:
 
 - Upcoming titles wait in a bottom stack.
 - Letters detach, turn vertically, and travel alongside the page.
@@ -124,11 +124,11 @@ Keep every section's `id`, links, and `data-label` consistent. The `#wordmark` t
 
 ## Future Procreate timelapse
 
-No timelapse has been supplied yet. A fixed, non-interactive `#art-background` layer and an optional scroll-to-video-time hook are prepared, but **disabled** in `dist/site-config.js`.
+No timelapse has been supplied yet. A fixed, non-interactive `#art-background` layer and an optional scroll-to-video-time hook are prepared, but **disabled** in `docs/site-config.js`.
 
 When the user provides the Procreate export:
 
-1. Place an optimized video under `dist/assets/process/`, optionally with a poster image.
+1. Place an optimized video under `docs/assets/process/`, optionally with a poster image.
 2. Set `background.video` and `background.poster` to paths relative to the site root and set `enabled: true` in `site-config.js`.
 3. Adjust `opacity` and review contrast over actual art. Galleries have airy backgrounds and remain independent of this layer.
 4. The hook in `gallery.js` maps page scroll progress to the video's duration. It seeks the paused, muted, inline video and waits for each seek to finish. Scrolling up reverses the drawing progress.
@@ -155,7 +155,7 @@ Reuse `.openai/hosting.json` and preserve its private audience:
 ```json
 {
   "project_id": "appgprj_6ad0dffb307c8191b74bb2c8eb09c5f3",
-  "static": { "directory": "dist" }
+  "static": { "directory": "docs" }
 }
 ```
 
@@ -175,6 +175,6 @@ Windows environment notes:
 - Prepend that directory and `C:/Users/TomaKuzmic/AppData/Local/Programs/Git/bin` to the helper process PATH. Git Bash works; the WindowsApps Bash previously failed on Windows script paths.
 - Set `TAR_OPTIONS=--force-local` for the helper so GNU tar treats `C:/...` archive paths as local.
 - Quote this Desktop path because it contains spaces. Keep deployment archives outside the repository.
-- Never include `source-media/` or ignored `artifacts/` in the deployed archive. Only `dist/` and the required hosting metadata belong in the publication.
+- Never include `source-media/` or ignored `artifacts/` in the deployed archive. Only `docs/` and the required hosting metadata belong in the publication.
 
 Update this README and `content/GROUPING.md` as the artist confirms names, grouping, credits, or future behavior.

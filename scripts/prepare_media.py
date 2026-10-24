@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--force', action='store_true', help='Regenerate existing web derivatives from preserved originals')
 args = parser.parse_args()
 inventory = json.loads((ROOT / 'content/source-inventory.json').read_text(encoding='utf-8'))
-assets = ROOT / 'dist/assets/art'
+assets = ROOT / 'docs/assets/art'
 assets.mkdir(parents=True, exist_ok=True)
 for item in inventory:
     original = ROOT / 'source-media' / item['transfer'] / item['relative']

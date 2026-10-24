@@ -16,12 +16,12 @@ Use **this Desktop/website folder for future work**. It contains the latest publ
 Open a terminal in this folder:
 
 ```powershell
-python -m http.server 4173 --bind 127.0.0.1 --directory dist
+python -m http.server 4173 --bind 127.0.0.1 --directory docs
 ```
 
-Visit http://127.0.0.1:4173. Stop with Ctrl+C. Python 3 is installed on this machine. Opening `dist/index.html` directly also works for the current implementation, but a local server is preferable for development.
+Visit http://127.0.0.1:4173. Stop with Ctrl+C. Python 3 is installed on this machine. Opening `docs/index.html` directly also works for the current implementation, but a local server is preferable for development.
 
-There is **no installation or build step**: no package.json, framework, bundler, or backend. Files in `dist/` are both the editable source and the deployable website. Do not delete that directory as generated output.
+There is **no installation or build step**: no package.json, framework, bundler, or backend. Files in `docs/` are both the editable source and the deployable website. Do not delete that directory as generated output.
 
 ## Files
 
@@ -32,13 +32,13 @@ website/
   .gitignore             Excludes QA artifacts, archives, and dependencies
   .git/                  Independent local Git history
   .openai/hosting.json    Existing Site identity and static hosting configuration
-  dist/
+  docs/
     index.html           Page skeleton, navigation, content placeholders
     style.css            All styles, responsive rules, and placeholder visuals
     app.js               Scroll navigation and letter animation
 ```
 
-Put future images, videos, or fonts under `dist/assets/` and use relative URLs. The current website requires no external assets or dependencies. No credentials are stored here. Disposable QA screenshots from the original project were not copied.
+Put future images, videos, or fonts under `docs/assets/` and use relative URLs. The current website requires no external assets or dependencies. No credentials are stored here. Disposable QA screenshots from the original project were not copied.
 
 ## Structure and content editing
 

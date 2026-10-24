@@ -3,7 +3,7 @@ import json, html, posixpath
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DIST = ROOT / 'dist'
+DIST = ROOT / 'docs'
 C = json.loads((ROOT / 'content/curation.json').read_text(encoding='utf-8'))
 inventory = {i['id']: i for i in json.loads((ROOT / 'content/source-inventory.json').read_text(encoding='utf-8'))}
 collections = {c['id']: c for c in C['collections']}
