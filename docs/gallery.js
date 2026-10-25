@@ -35,9 +35,10 @@
     search.addEventListener('input', applyFilter);
   }
 
-  // Optional future scroll-scrubbed background. Inactive until an actual export is supplied.
+  // Scroll-scrubbed Procreate timelapse, homepage only. The video starts on the blank
+  // canvas and ends on the finished drawing; the power curve front-loads the drawing.
   const config = window.PORTFOLIO_CONFIG?.background;
-  if (!config?.enabled || !config.video) return;
+  if (!config?.enabled || !config.video || !document.body.classList.contains('home')) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const script = [...document.scripts].find(s => s.src.endsWith('/gallery.js'));
   const base = new URL('.', script.src);
@@ -47,7 +48,7 @@
   host.append(video);
   let pending = false, target = 0;
   function seek() { if (!video.seeking && Number.isFinite(video.duration) && Math.abs(video.currentTime - target) > .04) video.currentTime = target; }
-  function update() { pending = false; const max = Math.max(1, document.documentElement.scrollHeight - innerHeight); target = reduced.matches ? 0 : Math.min(1, Math.max(0, scrollY / max)) * (video.duration || 0); seek(); }
+  function update() { pending = false; const max = Math.max(1, document.documentElement.scrollHeight - innerHeight); const p = Math.min(1, Math.max(0, scrollY / max)); target = reduced.matches ? 0 : Math.pow(p, .7) * (video.duration || 0); seek(); }
   const schedule = () => { if (!pending) { pending = true; requestAnimationFrame(update); } };
   video.addEventListener('loadedmetadata', schedule); video.addEventListener('seeked', seek);
   addEventListener('scroll', schedule, { passive: true }); addEventListener('resize', schedule); reduced.addEventListener('change', schedule);

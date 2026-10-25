@@ -5,7 +5,7 @@ from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 
 ROOT=Path(__file__).resolve().parents[1]
-DIST=ROOT/'dist'
+DIST=ROOT/'docs'
 class Document(HTMLParser):
     def __init__(self, path):
         super().__init__();self.ids=set();self.refs=[];self.images=0
